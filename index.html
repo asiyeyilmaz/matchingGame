@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Macera Eşleştirme Oyunu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="bg-layer"></div>
+<div id="fireflies"></div>
+<div id="confetti-container"></div>
+
+<!-- ===== SCREEN: MAP ===== -->
+<div id="screen-map" class="screen active">
+    <div class="game-panel">
+        <h1 class="game-title">MACERA<br>HARİTASI</h1>
+        <div class="adventure-map">
+            <svg class="map-svg" viewBox="0 0 440 190" preserveAspectRatio="xMidYMid meet">
+                <path class="map-road" id="road-1-2"
+                      d="M 55,138 C 80,172 160,172 200,148"/>
+                <path class="map-road" id="road-2-3"
+                      d="M 200,148 C 248,122 280,78 310,53"/>
+                <path class="map-road" id="road-3-t"
+                      d="M 310,53 L 408,58"/>
+            </svg>
+            <div class="map-node" id="node-1" style="left:6%;top:62%">
+                <div class="node-circle" id="ncircle-1">❤️</div>
+                <div class="node-label">LEVEL 1</div>
+            </div>
+            <div class="map-node" id="node-2" style="left:39%;top:67%">
+                <div class="node-circle" id="ncircle-2">❤️</div>
+                <div class="node-label">LEVEL 2</div>
+            </div>
+            <div class="map-node" id="node-3" style="left:64%;top:16%">
+                <div class="node-circle" id="ncircle-3">❤️</div>
+                <div class="node-label">LEVEL 3</div>
+            </div>
+            <div class="map-node" id="node-treasure" style="left:85%;top:18%">
+                <div class="node-circle treasure-node-circle">🎁</div>
+                <div class="node-label">HAZİNE</div>
+            </div>
+        </div>
+        <button class="btn-primary" onclick="onMapStart()">BAŞLA</button>
+    </div>
+</div>
+
+<!-- ===== SCREEN: LEVEL PREVIEW ===== -->
+<div id="screen-preview" class="screen">
+    <div class="game-panel">
+        <h2 class="level-heading" id="preview-title">LEVEL 1</h2>
+        <div class="stats-row">
+            <div id="preview-lives" class="lives-row"></div>
+            <div class="timer-badge">⏱ <span id="preview-time">20</span>s</div>
+        </div>
+        <div id="preview-grid" class="preview-grid"></div>
+        <button class="btn-primary" onclick="startLevel()">BAŞLA</button>
+    </div>
+</div>
+
+<!-- ===== SCREEN: GAME ===== -->
+<div id="screen-game" class="screen">
+    <div class="game-panel">
+        <div class="game-topbar">
+            <h2 class="level-heading" id="game-title">LEVEL 1</h2>
+            <div class="game-stats">
+                <div id="game-lives" class="lives-row"></div>
+                <div class="timer-badge" id="timer-badge">⏱ <span id="game-timer">20</span>s</div>
+            </div>
+        </div>
+        <div id="card-grid" class="card-grid"></div>
+    </div>
+</div>
+
+<!-- ===== SCREEN: GAME OVER ===== -->
+<div id="screen-gameover" class="screen">
+    <div class="game-panel center-panel">
+        <h2 class="level-heading" style="color:#e74c3c">OYUN<br>BİTTİ</h2>
+        <p class="sub-text">Tüm canlarını kaybettin!</p>
+        <button class="btn-primary" onclick="returnToMap()">ANA EKRANA DÖN</button>
+    </div>
+</div>
+
+<!-- ===== SCREEN: END / TREASURE ===== -->
+<div id="screen-end" class="screen">
+    <div class="game-panel center-panel">
+        <h1 class="game-title congrats-title">TEBRİKLER</h1>
+        <div id="treasure-wrapper">
+            <div id="treasure-closed" onclick="openTreasure()" class="treasure-clickable">
+                <img src="images/treasure_chest.png" class="treasure-chest-img" alt="Hazine"
+                     onerror="this.style.display='none';document.getElementById('chest-emoji').style.display='block'">
+                <div id="chest-emoji" style="display:none;font-size:5rem;filter:drop-shadow(0 0 20px gold)">🎁</div>
+                <p class="treasure-hint">AÇMAK İÇİN TIKLA</p>
+            </div>
+            <div id="treasure-open" class="hidden">
+                <img id="treasure-img" src="images/treasure_reveal.jpg" alt="Sürpriz!"
+                     onerror="this.style.display='none';document.getElementById('treasure-fallback').style.display='block'">
+                <div id="treasure-fallback" style="display:none;font-size:4rem">🎉🌟🎉</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>
